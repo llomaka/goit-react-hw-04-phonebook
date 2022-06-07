@@ -1,15 +1,8 @@
-import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styles from "./Filter.module.css";
 
-export default class Filter extends Component {
-  static propTypes = {
-    filter: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
-  };
-
-  render() {
-    const { filter, onChange } = this.props;
+export default function Filter(props) {
+    const { filter, onChange } = props;
     return (
       <>
         <h2 className={styles.header}>Find contacts by name</h2>
@@ -22,5 +15,10 @@ export default class Filter extends Component {
           />
       </>
     )
-  }
-}
+};
+
+Filter.propTypes = {
+  filter: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
+
