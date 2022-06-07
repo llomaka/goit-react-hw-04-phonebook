@@ -40,9 +40,7 @@ export default function App() {
   }
 
   const deleteContact = (id) => {
-    setContacts(prevContacts =>
-      [prevContacts.filter(contact => contact.id !== id)]
-    );
+    setContacts(prevContacts => prevContacts.filter(contact => contact.id !== id));
   }
 
   const renderContactList = () => (
