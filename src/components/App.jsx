@@ -1,27 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { nanoid } from 'nanoid';
 import ContactForm from './ContactForm';
 import ContactList from './ContactList';
 import styles from './App.module.css';
 import Filter from "./Filter/Filter";
 
-// const STORAGE_KEY = 'contacts';
+const STORAGE_KEY = 'contacts';
 
 export default function App() {
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState(
+    localStorage.getItem(STORAGE_KEY)
+      ? JSON.parse(localStorage.getItem(STORAGE_KEY))
+      : []
+  );
   const [filter, setFilter] = useState('');
 
-  // componentDidMount() {
-  //   if (localStorage.getItem(STORAGE_KEY)) {
-  //     this.setState({contacts: JSON.parse(localStorage.getItem(STORAGE_KEY))});
-  //   }
-  // }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (prevState.contacts !== this.state.contacts) {
-  //     localStorage.setItem(STORAGE_KEY, JSON.stringify(this.state.contacts));
-  //   }
-  // }
+  useEffect(() => {
+    if (contacts) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(contacts));
+    }
+  }, [contacts]);
 
   const onChange = (event) => {
     const { value } = event.target;
