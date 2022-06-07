@@ -30,13 +30,13 @@ export default function App() {
     if (contacts.find(contact => contact.name.toLowerCase() === name.toLowerCase())) {
       return alert(`${name} is already in Contacts List!`);
     }
-    setContacts(prevContacts => (
+    setContacts(prevContacts =>
       [...prevContacts, {
         id: nanoid(),
         name,
         number,
       }]
-    ));
+    );
   }
 
   const deleteContact = (id) => {
