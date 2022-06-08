@@ -1,8 +1,7 @@
 import PropTypes from "prop-types";
 import styles from "./ContactList.module.css";
 
-export default function ContactList(props) {
-  const { contacts, handleClick } = props;
+export default function ContactList({ contacts, handleClick }) {
   return (
     <ul>
       {contacts.map(contact =>

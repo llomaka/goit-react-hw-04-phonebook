@@ -1,8 +1,7 @@
 import PropTypes from "prop-types";
 import styles from "./Filter.module.css";
 
-export default function Filter(props) {
-    const { filter, onChange } = props;
+export default function Filter({ filter, onChange }) {
     return (
       <>
         <h2 className={styles.header}>Find contacts by name</h2>

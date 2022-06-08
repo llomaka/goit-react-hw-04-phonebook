@@ -3,31 +3,29 @@ import PropTypes from "prop-types";
 import { nanoid } from 'nanoid';
 import styles from "./ContactForm.module.css";
 
-export default function ContactForm(props) {
-  const [formdata, setFormdata] = useState({
-    name: '',
-    number: ''
-  });
-
+export default function ContactForm({ onSubmit }) {
+  const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
   const nameInputId = nanoid();
   const numberInputId = nanoid();
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
-    setFormdata(prevFormdata => ({
-      ...prevFormdata,
-      [name]: value
-    }));
+    if (name === 'name') {
+      setName(value);
+    } else if (name === 'number') {
+      setNumber(value);
+    }
   };
 
   const resetForm = () => {
-    setFormdata({ name: '', number: '' });
+    setName('');
+    setNumber('');
   };
 
   const handleSubmit = (event) => {
-    const { onSubmit } = props;
     event.preventDefault();
-    onSubmit({ ...formdata });
+    onSubmit({ name, number });
     resetForm();
   };
 
@@ -53,7 +51,7 @@ export default function ContactForm(props) {
             id={nameInputId}
             placeholder="John Smith"
             onChange={handleInputChange}
-            value={formdata.name}
+            value={name}
           />
         </div>
         <div className={styles.fields}>
@@ -72,7 +70,7 @@ export default function ContactForm(props) {
             id={numberInputId}
             placeholder="050-123-23-23"
             onChange={handleInputChange}
-            value={formdata.number}
+            value={number}
           />
         </div>
         <button
