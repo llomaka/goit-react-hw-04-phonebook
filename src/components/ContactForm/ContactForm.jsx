@@ -9,7 +9,7 @@ export default function ContactForm({ onSubmit }) {
   const nameInputId = nanoid();
   const numberInputId = nanoid();
 
-  const handleInputChange = (event) => {
+  const handleInputChange = event => {
     const { name, value } = event.target;
     if (name === 'name') {
       setName(value);
@@ -23,7 +23,7 @@ export default function ContactForm({ onSubmit }) {
     setNumber('');
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = event => {
     event.preventDefault();
     onSubmit({ name, number });
     resetForm();

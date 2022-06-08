@@ -8,20 +8,14 @@ import Filter from "./Filter/Filter";
 const STORAGE_KEY = 'contacts';
 
 export default function App() {
-  const [contacts, setContacts] = useState(() =>
-    JSON.parse(window.localStorage.getItem(STORAGE_KEY))
-    ?? []
-  );
+  const [contacts, setContacts] = useState(() => JSON.parse(window.localStorage.getItem(STORAGE_KEY)) ?? []);
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(contacts));
   }, [contacts]);
 
-  const onChange = (event) => {
-    const { value } = event.target;
-    setFilter(value.trim());
-  }
+  const onChange = event => setFilter(event.target.value.trim());
 
   const addContact = ({ name, number }) => {
     if (contacts.find(contact => contact.name.toLowerCase() === name.toLowerCase())) {
@@ -34,15 +28,11 @@ export default function App() {
         number,
       }]
     );
-  }
+  };
 
-  const deleteContact = id => {
-    setContacts(prevContacts => prevContacts.filter(contact => contact.id !== id));
-  }
+  const deleteContact = id => setContacts(prevContacts => prevContacts.filter(contact => contact.id !== id));
 
-  const renderContactList = () => (
-    contacts.filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase()))
-  )
+  const renderContactList = () => contacts.filter(contact => contact.name.toLowerCase().includes(filter.toLowerCase()));
 
   return (
     <div
