@@ -8,17 +8,14 @@ import Filter from "./Filter/Filter";
 const STORAGE_KEY = 'contacts';
 
 export default function App() {
-  const [contacts, setContacts] = useState(
-    localStorage.getItem(STORAGE_KEY)
-      ? JSON.parse(localStorage.getItem(STORAGE_KEY))
-      : []
+  const [contacts, setContacts] = useState(() =>
+    JSON.parse(window.localStorage.getItem(STORAGE_KEY))
+    ?? []
   );
   const [filter, setFilter] = useState('');
 
   useEffect(() => {
-    if (contacts) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(contacts));
-    }
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(contacts));
   }, [contacts]);
 
   const onChange = (event) => {
